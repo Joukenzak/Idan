@@ -12,8 +12,10 @@
         <exec.mainClass>com.mycompany.idan.Idan</exec.mainClass>
     </properties>
     <dependencies>
-        <groupId>com.mysql</groupId>
-        <artifactId>mysql-connector-j</artifactId>
-        <versio>9.4.0</versio>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.4.0</version>
+        </dependency>
     </dependencies>
 </project>

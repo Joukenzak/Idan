@@ -1,30 +1,70 @@
 package com.mycompany.idan.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Entity
+@Table(name = "pesanan")
 public class Pesanan {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nomor_pesanan", nullable = false, unique = true)
     private String nomorPesanan;
+
+    @ManyToOne
+    @JoinColumn(name = "pelanggan_id", nullable = false)
     private Pelanggan pelanggan;
+
+    @Column(name = "nama_gunpla", nullable = false)
     private String namaGunpla;
+
+    @Column(name = "tanggal_pesanan")
     private LocalDateTime tanggalPesanan;
+
+    @Column(name = "status")
     private String status;
 
-    private final List<Layanan> daftarLayanan;
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @JoinColumn(name = "pesanan_id")
+    private List<Layanan> daftarLayanan = new ArrayList<>();
 
+    // Constructor untuk Hibernate
+    protected Pesanan() {
+    }
+
+    // Constructor untuk pembuatan objek biasa
     public Pesanan(String nomorPesanan,
                    Pelanggan pelanggan,
                    String namaGunpla) {
 
         this.nomorPesanan = nomorPesanan;
-        this.pelanggan = pelanggan;
+        setPelanggan(pelanggan);
         this.namaGunpla = namaGunpla;
         this.tanggalPesanan = LocalDateTime.now();
         this.status = "Menunggu Konfirmasi";
-        this.daftarLayanan = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void tambahLayanan(Layanan layanan) {

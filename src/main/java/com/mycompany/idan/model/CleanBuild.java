@@ -1,8 +1,20 @@
+
 package com.mycompany.idan.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("CLEAN_BUILD")
 public class CleanBuild extends Layanan {
 
+    @Column(name = "grade")
     private String grade;
+
+    // Constructor untuk Hibernate
+    protected CleanBuild() {
+    }
 
     public CleanBuild(String grade) {
         super("Clean Build");

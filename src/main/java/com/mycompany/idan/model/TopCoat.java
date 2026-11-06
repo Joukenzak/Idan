@@ -1,29 +1,24 @@
+
 package com.mycompany.idan.model;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("TOP_COAT")
 public class TopCoat extends Layanan {
 
-    private double harga;
+    // Constructor untuk Hibernate
+    protected TopCoat() {
+    }
 
     public TopCoat(double harga) {
         super("Top Coat");
         setHarga(harga);
     }
 
-    public double getHarga() {
-        return harga;
-    }
-
-    public void setHarga(double harga) {
-        if (harga < 0) {
-            throw new IllegalArgumentException(
-                "Harga tidak boleh negatif."
-            );
-        }
-        this.harga = harga;
-    }
-
     @Override
     public double hitungBiaya() {
-        return harga;
+        return getHarga();
     }
 }

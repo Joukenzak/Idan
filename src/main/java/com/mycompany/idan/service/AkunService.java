@@ -11,45 +11,48 @@ import java.util.List;
 public class AkunService {
 
     // CREATE: Menambahkan akun baru
-    public void tambahAkun(Akun akun) {
+    public boolean tambahAkun(Akun akun) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-        Transaction transaction = null;
+            Transaction transaction = session.beginTransaction();
 
-        try (Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession()) {
-
-            transaction = session.beginTransaction();
-
-            // Memeriksa username yang sudah terdaftar
-            Long jumlah = session.createQuery(
-                    "SELECT COUNT(a) FROM Akun a "
-                    + "WHERE a.username = :username",
+            try {
+                Long jumlah = session.createQuery(
+                    "SELECT COUNT(a) FROM Akun a WHERE a.username = :username",
                     Long.class
-            )
-            .setParameter("username", akun.getUsername())
-            .getSingleResult();
+                )
+                .setParameter("username", akun.getUsername())
+                .getSingleResult();
 
-            if (jumlah > 0) {
-                throw new IllegalArgumentException(
-                        "Username sudah digunakan."
-                );
+                // Periksa apakah username sudah digunakan
+                if (jumlah > 0) {
+                    transaction.rollback();
+
+                    System.out.println("Username sudah digunakan!");
+                    return false;
+                }
+
+                // Simpan akun baru
+                session.persist(akun);
+                transaction.commit();
+
+                System.out.println("Akun berhasil ditambahkan!");
+                return true;
+
+            } catch (Exception e) {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+
+                System.out.println("Gagal menambahkan akun!");
+                e.printStackTrace();
+                return false;
             }
-
-            session.persist(akun);
-
-            transaction.commit();
-
-            System.out.println("Akun berhasil ditambahkan!");
 
         } catch (Exception e) {
-
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-
-            System.out.println("Gagal menambahkan akun!");
+            System.out.println("Gagal membuka proses Hibernate!");
             e.printStackTrace();
+            return false;
         }
     }
 

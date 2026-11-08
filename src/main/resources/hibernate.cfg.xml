@@ -28,6 +28,7 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         
+        <mapping class="com.mycompany.idan.model.Akun"/>
         <!-- Entity Pelanggan dan Pesanan -->
         <mapping class="com.mycompany.idan.model.Pelanggan"/>
         <mapping class="com.mycompany.idan.model.Pesanan"/>

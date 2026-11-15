@@ -143,37 +143,38 @@ public class SignUpForm extends javax.swing.JFrame {
         }
 
         try {
-            com.mycompany.idan.model.Akun akun =
-                new com.mycompany.idan.model.Akun(
-                    username,
-                    password
-                );
+            com.mycompany.idan.dao.AkunDao akunDao =
+                com.mycompany.idan.config.AppContext.akunDao();
 
-            com.mycompany.idan.service.AkunService service =
-                new com.mycompany.idan.service.AkunService();
-
-            boolean berhasil = service.tambahAkun(akun);
-
-            if (berhasil) {
+            if (akunDao.cariByUsername(username) != null) {
                 javax.swing.JOptionPane.showMessageDialog(
                     this,
-                    "Sign Up berhasil! Silakan login."
+                    "Sign Up gagal! Username sudah digunakan."
                 );
-
-                Username.setText("");
-                Password.setText("");
-
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Sign Up gagal! Username mungkin sudah digunakan."
-                );
+                return;
             }
+
+            akunDao.simpan(
+                new com.mycompany.idan.model.Akun(username, password)
+            );
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Sign Up berhasil! Silakan login."
+            );
+
+            Username.setText("");
+            Password.setText("");
 
         } catch (IllegalArgumentException e) {
             javax.swing.JOptionPane.showMessageDialog(
                 this,
                 e.getMessage()
+            );
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Sign Up gagal: " + e.getMessage()
             );
         }
     }//GEN-LAST:event_jButton1ActionPerformed

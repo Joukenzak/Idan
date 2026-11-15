@@ -4,8 +4,6 @@
  */
 package com.mycompany.idan;
 
-import java.sql.ResultSet;
-
 /**
  *
  * @author user
@@ -135,33 +133,23 @@ public class LoginForm extends javax.swing.JPanel {
             return;
         }
 
-        String url = "jdbc:mysql://localhost:3306/Idan";
+        try {
+            com.mycompany.idan.model.Akun akun =
+                com.mycompany.idan.config.AppContext
+                    .akunDao()
+                    .cariByUsername(username);
 
-        try (
-            java.sql.Connection conn =
-                java.sql.DriverManager.getConnection(url, "root", "");
-
-            java.sql.PreparedStatement ps = conn.prepareStatement(
-                "SELECT * FROM login WHERE username = ? AND password = ?"
-        )
-        ) 
-        {
-            ps.setString(1, username);
-            ps.setString(2, password);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    javax.swing.JOptionPane.showMessageDialog(
-                        this, "Login berhasil! Selamat datang, " + username
-                    );
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(
-                        this, "Username atau password salah!"
-                    );
-                }
+            if (akun != null && akun.getPassword().equals(password)) {
+                javax.swing.JOptionPane.showMessageDialog(
+                    this, "Login berhasil! Selamat datang, " + username
+                );
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(
+                    this, "Username atau password salah!"
+                );
             }
 
-        } catch (java.sql.SQLException e) {
+        } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(
                 this, "Koneksi database gagal: " + e.getMessage()
             );

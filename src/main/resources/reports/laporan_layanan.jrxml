@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Laporan Daftar Detail Layanan - IdanMerakit. Dapat dibuka dan diedit di Jaspersoft Studio. -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="laporan_layanan" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenNoDataType="AllSectionsNoDetail" uuid="bc8880ac-77ff-4920-a133-3dce8708abf7">
+	<parameter name="NAMA_USAHA" class="java.lang.String">
+		<defaultValueExpression><![CDATA["IdanMerakit"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TANGGAL_CETAK" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<field name="nomorPesanan" class="java.lang.String"/>
+	<field name="tanggalPesanan" class="java.util.Date"/>
+	<field name="namaPelanggan" class="java.lang.String"/>
+	<field name="namaGunpla" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="jenisLayanan" class="java.lang.String"/>
+	<field name="keterangan" class="java.lang.String"/>
+	<field name="biaya" class="java.lang.Double"/>
+	<variable name="TOTAL_BIAYA" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{biaya}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="14" isBold="true"/></textElement>
+				<text><![CDATA[LAPORAN DAFTAR DETAIL LAYANAN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="26" width="802" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="11"/></textElement>
+				<textFieldExpression><![CDATA[$P{NAMA_USAHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="46" width="802" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA["Dicetak pada: " + new java.text.SimpleDateFormat("dd MMMM yyyy HH:mm").format($P{TANGGAL_CETAK})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="0" y="0" width="30" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="30" y="0" width="75" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[No. Pesanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="105" y="0" width="70" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="175" y="0" width="105" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Pelanggan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="280" y="0" width="130" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Gunpla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="410" y="0" width="95" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="505" y="0" width="95" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Layanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="600" y="0" width="90" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Keterangan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" backcolor="#D9E2F3" x="690" y="0" width="112" height="22"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<text><![CDATA[Biaya (Rp)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="30" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="75" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{nomorPesanan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMM yyyy" isBlankWhenNull="true">
+				<reportElement x="105" y="0" width="70" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{tanggalPesanan}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="175" y="0" width="105" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{namaPelanggan}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="130" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{namaGunpla}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="0" width="95" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="505" y="0" width="95" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{jenisLayanan}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="600" y="0" width="90" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="690" y="0" width="112" height="20"/>
+				<box padding="3"><pen lineWidth="0.5"/></box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9"/></textElement>
+				<textFieldExpression><![CDATA[$F{biaya}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="2" width="802" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="8"/></textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="46">
+			<textField>
+				<reportElement x="0" y="6" width="690" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA["Jumlah layanan: " + $V{REPORT_COUNT} + "     Total biaya:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="&apos;Rp &apos;#,##0" isBlankWhenNull="true">
+				<reportElement x="690" y="6" width="112" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"><font fontName="DejaVu Sans" size="9" isBold="true"/></textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_BIAYA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

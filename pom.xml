@@ -13,6 +13,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.idan.Idan</exec.mainClass>
         <spring.version>6.2.16</spring.version>
+        <!-- Samakan dengan versi Jaspersoft Studio yang dipakai untuk mendesain laporan -->
+        <jasper.version>7.0.3</jasper.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,6 +41,22 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <!-- JasperReports: core, ekspor PDF, dan font bawaan (DejaVu) -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>${jasper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-pdf</artifactId>
+            <version>${jasper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>6.21.5</version>
         </dependency>
     </dependencies>
 </project>
